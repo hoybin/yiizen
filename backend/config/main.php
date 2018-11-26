@@ -11,7 +11,20 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            'allowedIPs' => ['127.0.0.1', '::1'],
+            'generators' => [
+                'crud' => [
+                    'class' => 'yii\gii\generators\crud\Generator',
+                    'templates' => [
+                        'adminlte' => '@vendor/dmstr/yii2-adminlte-asset/gii/templates/crud/simple',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -45,6 +58,21 @@ return [
             ],
         ],
         */
+        'assetManager' => [
+            'bundles' => [
+                'dmstr\web\AdminLteAsset' => [
+                    'skin' => 'skin-blue',
+                    /*
+                    skin-red    skin-red-light
+                    skin-blue   skin-blue-light
+                    skin-black  skin-black-light
+                    skin-green  skin-green-light
+                    skin-yellow skin-yellow-light
+                    skin-purple skin-purple-light
+                    */
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
