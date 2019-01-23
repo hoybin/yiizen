@@ -85,6 +85,14 @@ return [
                 ],
             ],
         ],
+        'i18n' => [
+            'translations' => [
+                'catalog*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@backend/messages',
+                ],
+            ],
+        ],
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',

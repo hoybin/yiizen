@@ -1,0 +1,17 @@
+div.required label:after {
+    content: " *";
+    color: red;
+}
+
+td.path, td.id, td.sort, span.path, span.id, span.sort {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.grid-view .summary {
+    padding: 8px;
+    padding-top: 0;
+}
+
+.grid-view .summary b {
+    padding: 2px;
+}
