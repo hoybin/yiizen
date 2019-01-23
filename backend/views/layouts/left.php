@@ -1,3 +1,9 @@
+<?php
+use mdm\admin\components\MenuHelper;
+
+$items = MenuHelper::getAssignedMenu(Yii::$app->user->id);
+?>
+
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -26,6 +32,7 @@
         </form>
         <!-- /.search form -->
 
+        <?php if (empty($items)) : ?>
         <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
@@ -63,6 +70,12 @@
                 ],
             ]
         ) ?>
+        <?php else : ?>
+            <?= dmstr\widgets\Menu::widget([
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id)
+            ]); ?>
+        <?php endif ?>
 
     </section>
 

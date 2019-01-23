@@ -24,6 +24,9 @@ return [
                 ],
             ],
         ],
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ],
     ],
     'components' => [
         'request' => [
@@ -50,14 +53,23 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            // 是否启用URL美化功能
             'enablePrettyUrl' => true,
+            // 是否在URL中显示入口脚本，是对美化功能的进一步补充
+            // 仅在 enablePrettyUrl 启用时有效
             'showScriptName' => false,
+            // 是否启用严格解析，如启用严格解析，要求当前请求应至少匹配1个路由规则，否则认为是无效路由
+            // 仅在 enablePrettyUrl 启用时有效
+            'enableStrictParsing' => false,
+            // 指定续接在URL后面的一个后缀，如 .html 之类的。
+            // 仅在 enablePrettyUrl 启用时有效
+            'suffix' => '',
             'rules' => [
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
-        */
         'assetManager' => [
             'bundles' => [
                 'dmstr\web\AdminLteAsset' => [
@@ -72,6 +84,19 @@ return [
                     */
                 ],
             ],
+        ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'admin/*',
+            'some-controller/some-action',
+            // The actions listed here will be allowed to everyone including guests.
+            // So, 'admin/*' should not appear here in the production, of course.
+            // But in the earlier stages of your development, you may probably want to
+            // add a lot of actions here until you finally completed setting up rbac,
+            // otherwise you may not even take a first step.
         ],
     ],
     'params' => $params,
